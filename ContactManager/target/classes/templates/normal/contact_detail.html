@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+    <section>
+      
+      <div class="card mr-3 ml-3">
+      
+      <div class="card-body" th:if=${contact}>
+      
+      <div class = "container text-center">
+      
+       <img src="" style="height: 200px; width: 200px;" class="my_profile_picture" 
+
+     th:src="@{'/img/'+${contact.image}}" 
+     alt="profile photo"/>
+
+      <h2 class= "mt-2"> <span th:text="${contact.name}"></span>(<span th:text="${contact.secondName}"></span>)</h2>
+      
+      
+      <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID<span th:text ="${contact.cId}"></span></th>
+  
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Email</th>
+      <td><span th:text="${contact.email}"></span></td>
+       </tr>
+       
+       <tr>
+       <th scope="row">Phone</th>
+      <td><span th:text="${contact.phone}"></span></td>
+       </tr>
+      
+      <tr>
+       <th scope="row">Work</th>
+      <td><span th:text="${contact.work}"></span></td>
+      
+    </tr>
+  
+  </tbody>
+</table>
+      
+      <div class ="discription mt-3">
+      
+      <th:block th:utext="${contact.description}"></th:block>
+      </div>
+      
+      <div class ="container mt-3">
+ <!--       <button class="btn btn-danger btn-sm ">Delete</button> -->
+ 
+ 
+  	 <a href="#" th:onclick="|deleteContact(${contact.cId})|" class="btn btn-danger btn-sm">Delete</a>
+ 
+   <!--     <button class="btn btn-success btn-sm ">Update</button> -->
+   
+   
+    <form method="post" th:action="@{'/user/update-contact/'+${contact.cId}}">
+      <button type ="submit" class="btn btn-success btn-sm mt-3">Update</button>
+      
+      </form>
+      
+      </div>
+      
+      
+   
+      
+      </div>
+       
+     
+      
+</div>
+<h2 class = "text-center" th:unless ="${contact}"> You don't have permission to view this contact </h2>
+
+    </section>
+       
+    
+    
+</body>
+</html>  
